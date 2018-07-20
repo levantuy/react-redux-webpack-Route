@@ -4,8 +4,8 @@ import { Provider } from 'react-redux'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import App from './pages/App';
-import Home from './components/home/Home';
-import About from './components/about/about';
+import NoticesIndex from './pages/NoticesIndex';
+import About from './pages/About';
 import configureStore from './store/configureStore.js';
 
 const store = configureStore();
@@ -17,8 +17,8 @@ ReactDOM.render(
     { /* Tell the Router to use our enhanced history */}
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={Home} />
-        <Route path="" component={Home} />
+        <IndexRoute component={NoticesIndex} />
+        <Route path="" component={NoticesIndex} />
         <Route path="about-us" component={About} />
       </Route>
     </Router>
