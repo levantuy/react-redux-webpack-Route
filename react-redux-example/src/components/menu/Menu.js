@@ -24,12 +24,17 @@ class Menu extends Component {
                             <NavItem>
                                 <Link role="presentation" to="/about-us">Dashboard</Link>
                             </NavItem>
-                            <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-                                <MenuItem eventKey={3.1}>Action</MenuItem>
-                                <MenuItem eventKey={3.2}>Another action</MenuItem>
-                                <MenuItem eventKey={3.3}>Something else here</MenuItem>
+                            <NavDropdown role="presentation" title="Dropdown" id="basic-nav-dropdown">
+                                <MenuItem>
+                                    <Link role="presentation" to="/">Action 1</Link>
+                                </MenuItem>
+                                <MenuItem>
+                                    <Link role="presentation" to="/">Action 2</Link>
+                                </MenuItem>
                                 <MenuItem divider />
-                                <MenuItem eventKey={3.3}>Separated link</MenuItem>
+                                <MenuItem>
+                                    <Link role="presentation" to="/">Separated link</Link>
+                                </MenuItem>
                             </NavDropdown>
                         </Nav>
                         <Navbar.Form pullLeft>
