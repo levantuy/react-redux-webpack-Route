@@ -1,10 +1,20 @@
 import React, { Component, PropTypes } from 'react';
-import { fetchNotices } from '../../actions/action_home';
+import { fetchNotices, fetchNoticesSuccess, fetchNoticesFailure } from '../../actions/action_home';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
+import { Button } from 'react-bootstrap';
 
 //For any field errors upon submission (i.e. not instant check)
 const btnAdd_Click = (values, dispatch) => {
-    return dispatch(fetchNotices());
+    return dispatch(fetchNotices()).then(result => {
+        // Note: Error's "data" is in result.payload.response.data (inside "response")
+        // success's "data" is in result.payload.data
+        if (result.payload.response && result.payload.response.status !== 200) {
+            dispatch(fetchNoticesFailure(result.payload.response.data));
+            throw new SubmissionError(result.payload.response.data);
+        }
+        //let other components know that everything is fine by updating the redux` state
+        dispatch(fetchNoticesSuccess(result.payload.data)); //ps: this is same as dispatching RESET_USER_FIELDS
+    });
 }
 
 class Home extends Component {
@@ -19,23 +29,45 @@ class Home extends Component {
         this.props.fetchNotices();
     }
 
-    render() {
-        // const { notices, loading, error } = this.props.noticesList;
-        const cc = this.props.noticesList;
+    renderNotices(notices) {
         const { handleSubmit, submitting } = this.props;
-        // const noticesElement = notices.map((notice) => {
-        //     <p>
-        //         {notice.Title}
-        //     </p>                
-        // });
 
+        return notices.map((notice) => {
+            return (
+                <div key={notice.NoticeId}>
+                    <input type="hidden" value={notice.NoticeId} />
+                    <h4>{notice.Title}</h4>
+                    <pre>{notice.Content}</pre>
+                    <a href={notice.Url} className="pull-right" target="_blank">go to link</a>
+                    <br />
+                    <form onSubmit={handleSubmit(btnAdd_Click.bind(this))}>
+                        <div className="btn-toolbar text-center">
+                            <button type="submit" className="btn btn-primary" disabled={submitting}>Edit</button>
+                            <button type="submit" className="btn btn-primary" disabled={submitting}>Delete</button>
+                        </div>
+                    </form>
+                </div>
+            );
+        });
+    }
+
+    render() {
+        const { notices, loading, error } = this.props.noticesList;
+        if (loading) {
+            return <div className="container"><h1>Posts</h1><h3>Loading...</h3></div>
+        } else if (error) {
+            return <div className="alert alert-danger">Error: {error.message}</div>
+        }
+
+        const { handleSubmit, submitting } = this.props;
 
         return (
+
             <div>
                 <form onSubmit={handleSubmit(btnAdd_Click.bind(this))}>
-                    <button type="submit" className="btn btn-primary" disabled={submitting}>Update Email</button>
-                    {/* {noticesElement} */}
+                    <button type="submit" className="btn btn-primary" disabled={submitting}>Submit</button>
                 </form>
+                {this.renderNotices(notices)}
             </div>
         );
     }

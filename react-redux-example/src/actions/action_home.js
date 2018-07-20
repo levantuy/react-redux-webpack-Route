@@ -1,18 +1,25 @@
 import axios from 'axios'
-//Post list
+//Notices list
 export const FETCH_NOTICES = 'FETCH_NOTICES';
 export const FETCH_NOTICES_SUCCESS = 'FETCH_NOTICES_SUCCESS';
 export const FETCH_NOTICES_FAILURE = 'FETCH_NOTICES_FAILURE';
 export const RESET_NOTICES = 'RESET_NOTICES';
 
-// const ROOT_URL = window.location.href.indexOf('localhost') > 0 ? 'http://localhost:3000/api' : '/api';
+//Notice item
+export const CREATE_NOTICE = 'CREATE_NOTICE';
+export const CREATE_NOTICE_SUCCESS = 'CREATE_NOTICE_SUCCESS';
+export const CREATE_NOTICE_FAILURE = 'CREATE_NOTICE_FAILURE';
+export const RESET_NOTICE_CREATE = 'RESET_NOTICE_CREATE';
+
+//#region NOTICES
+
 const ROOT_URL = 'http://flashlightvn.com/api';
 export function fetchNotices(props) {
   const request = axios({
     method: 'get',
     url: `${ROOT_URL}/Notice/index`,
     headers: {
-      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwibmJmIjoxNTMyMDcyNDkzLCJleHAiOjE1MzIwNzYwOTMsImlhdCI6MTUzMjA3MjQ5M30.evNO98-lt_YXNzYuFPInYEbAHm_MLcn4fXxvpqrNong`
+      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluIiwibmJmIjoxNTMyMDk2ODk1LCJleHAiOjE1MzIxMDA0OTUsImlhdCI6MTUzMjA5Njg5NX0.KcC925XfUmsElVcVkdVTAA2TwlJT5Vg8IL8ca1c8X_o`
     }
   });
 
@@ -25,7 +32,7 @@ export function fetchNotices(props) {
 export function fetchNoticesSuccess(notices) {
   return {
     type: FETCH_NOTICES_SUCCESS,
-    payload: notices
+    payload: notices.data
   };
 }
 
@@ -35,3 +42,6 @@ export function fetchNoticesFailure(error) {
     payload: error
   };
 }
+
+//#endregion
+
