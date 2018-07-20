@@ -8,6 +8,13 @@ const btnAdd_Click = (values, dispatch) => {
 }
 
 class Home extends Component {
+    constructor(props, context) {
+        super(props);
+        this.state = {
+
+        };
+    };
+
     componentWillMount() {
         this.props.fetchNotices();
     }
