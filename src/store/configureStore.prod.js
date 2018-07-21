@@ -1,9 +1,10 @@
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from '../reducers/reducer_home';
 import promise from 'redux-promise';
+import auth from '../authMiddleware';
 
 // Middleware you want to use in production:
-const enhancer = applyMiddleware(promise);
+const enhancer = applyMiddleware(promise, auth);
 
 export default function configureStore(initialState) {
   // Note: only Redux >= 3.1.0 supports passing enhancer as third argument.
