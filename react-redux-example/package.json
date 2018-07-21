@@ -2,6 +2,10 @@
   "name": "react-redux-example",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "npm": "5.6.0",
+    "node": "8.11.2"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "connected-react-router": "^4.3.0",
