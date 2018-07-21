@@ -11,7 +11,6 @@ const rootReducer = combineReducers({
 export default rootReducer
 
 export const accessToken = state => fromAuth.accessToken(state.authReducer)
-export const reducer_fetchNotices = state => fromNotice.reducer_fetchNotices(state.homeReducer)
 
 export function withAuth(headers={}) {
   return (state) => ({

@@ -27,5 +27,13 @@ export const fetchNotices = () => ({
   }
 })
 
+export function fetchPostsSuccess(notices){
+
+};
+
+export function fetchPostsFailure(notices){
+
+};
+
 //#endregion
 

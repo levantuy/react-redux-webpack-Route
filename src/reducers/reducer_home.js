@@ -26,5 +26,3 @@ export default (state = INITIAL_STATE, action) => {
             return state
     }
 }
-
-export const reducer_fetchNotices = (state) => state.noticesList
