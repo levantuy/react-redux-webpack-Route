@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import promise from 'redux-promise';
 import reducer from '../reducers';
-
+import auth from '../authMiddleware';
 
 export default function configureStore(initialState) {
   const finalCreateStore = compose(
-    applyMiddleware(promise),
+    applyMiddleware(promise, auth),
     window.devToolsExtension ? window.devToolsExtension() : f => f
   )(createStore);
 

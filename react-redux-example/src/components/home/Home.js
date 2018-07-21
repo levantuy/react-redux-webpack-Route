@@ -1,20 +1,23 @@
 import React, { Component, PropTypes } from 'react';
-import { fetchNotices, fetchNoticesSuccess, fetchNoticesFailure } from '../../actions/action_home';
+// import { fetchNotices, fetchNoticesSuccess, fetchNoticesFailure } from '../../actions/action_home';
 import { reduxForm, Field, SubmissionError } from 'redux-form';
 import { Button } from 'react-bootstrap';
 
 //For any field errors upon submission (i.e. not instant check)
+// const btnAdd_Click = (values, dispatch) => {
+//     return dispatch(fetchNotices()).then(result => {
+//         // Note: Error's "data" is in result.payload.response.data (inside "response")
+//         // success's "data" is in result.payload.data
+//         if (result.payload.response && result.payload.response.status !== 200) {
+//             dispatch(fetchNoticesFailure(result.payload.response.data));
+//             throw new SubmissionError(result.payload.response.data);
+//         }
+//         //let other components know that everything is fine by updating the redux` state
+//         dispatch(fetchNoticesSuccess(result.payload.data)); //ps: this is same as dispatching RESET_USER_FIELDS
+//     });
+// }
 const btnAdd_Click = (values, dispatch) => {
-    return dispatch(fetchNotices()).then(result => {
-        // Note: Error's "data" is in result.payload.response.data (inside "response")
-        // success's "data" is in result.payload.data
-        if (result.payload.response && result.payload.response.status !== 200) {
-            dispatch(fetchNoticesFailure(result.payload.response.data));
-            throw new SubmissionError(result.payload.response.data);
-        }
-        //let other components know that everything is fine by updating the redux` state
-        dispatch(fetchNoticesSuccess(result.payload.data)); //ps: this is same as dispatching RESET_USER_FIELDS
-    });
+
 }
 
 class Home extends Component {
@@ -26,7 +29,7 @@ class Home extends Component {
     };
 
     componentWillMount() {
-        this.props.fetchNotices();
+        this.props.ContainerfetchNotices();
     }
 
     renderNotices(notices) {
@@ -52,8 +55,8 @@ class Home extends Component {
     }
 
     render() {
-        const { notices, loading, error } = this.props.noticesList;
-        if (loading) {
+        const { notices, loading, error } = this.props.noticesList;        
+        if (notices === 'undefined' || loading) {
             return <div className="container"><h1>Posts</h1><h3>Loading...</h3></div>
         } else if (error) {
             return <div className="alert alert-danger">Error: {error.message}</div>

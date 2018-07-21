@@ -1,10 +1,22 @@
 import { combineReducers } from 'redux';
-import home from './reducer_home';
 import about from './reducer_about';
+import home, * as fromNotice from './reducer_home'
+import auth, * as fromAuth from './reducer_auth';
+import { routerReducer } from 'react-router-redux';
 
-const rootReducer = combineReducers({
+export default combineReducers({
   homeReducer: home,
-  aboutReducer: about
+  aboutReducer: about,
+  authReducer: auth,
+  router: routerReducer
 });
 
-export default rootReducer;
+export const accessToken = state => fromAuth.accessToken(state.authReducer)
+export const reducer_fetchNotices = state => fromNotice.reducer_fetchNotices(state.homeReducer)
+
+export function withAuth(headers={}) {
+  return (state) => ({
+    ...headers,
+    'Authorization': `Bearer ${accessToken(state)}`
+  })
+}
