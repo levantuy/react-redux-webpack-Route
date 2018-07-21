@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { RSAA } from 'redux-api-middleware';
 import { withAuth } from '../reducers'
 //Notices list

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import Menu from '../menu/Menu';
 
 export default class App extends Component {

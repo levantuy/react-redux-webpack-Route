@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchNotices, fetchNoticesSuccess, fetchNoticesFailure } from '../../actions/action_home.js'
+import { fetchNotices } from '../../actions/action_home.js'
 import Home from '../../components/home/Home.js'
 import {reducer_fetchNotices} from '../../reducers'
 

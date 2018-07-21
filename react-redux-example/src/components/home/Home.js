@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-// import { fetchNotices, fetchNoticesSuccess, fetchNoticesFailure } from '../../actions/action_home';
-import { reduxForm, Field, SubmissionError } from 'redux-form';
+import React, { Component } from 'react';
+import { reduxForm, SubmissionError } from 'redux-form';
 import { Button } from 'react-bootstrap';
 
 //For any field errors upon submission (i.e. not instant check)
@@ -16,9 +15,6 @@ import { Button } from 'react-bootstrap';
 //         dispatch(fetchNoticesSuccess(result.payload.data)); //ps: this is same as dispatching RESET_USER_FIELDS
 //     });
 // }
-const btnAdd_Click = (values, dispatch) => {
-
-}
 
 class Home extends Component {
     constructor(props, context) {
@@ -27,6 +23,10 @@ class Home extends Component {
 
         };
     };
+
+    btnAdd_Click = () => {
+        this.props.ContainerfetchNotices();
+    }
 
     componentWillMount() {
         this.props.ContainerfetchNotices();
@@ -43,12 +43,12 @@ class Home extends Component {
                     <pre>{notice.Content}</pre>
                     <a href={notice.Url} className="pull-right" target="_blank">go to link</a>
                     <br />
-                    <form onSubmit={handleSubmit(btnAdd_Click.bind(this))}>
+                    {/* <form onSubmit={handleSubmit(btnAdd_Click.bind(this))}>
                         <div className="btn-toolbar text-center">
                             <button type="submit" className="btn btn-primary" disabled={submitting}>Edit</button>
                             <button type="submit" className="btn btn-primary" disabled={submitting}>Delete</button>
                         </div>
-                    </form>
+                    </form> */}
                 </div>
             );
         });
@@ -67,8 +67,8 @@ class Home extends Component {
         return (
 
             <div>
-                <form onSubmit={handleSubmit(btnAdd_Click.bind(this))}>
-                    <button type="submit" className="btn btn-primary" disabled={submitting}>Submit</button>
+                <form onSubmit={this.btnAdd_Click}>
+                    <button type="submit" className="btn btn-primary">Reload</button>
                 </form>
                 {this.renderNotices(notices)}
             </div>

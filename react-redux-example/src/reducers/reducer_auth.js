@@ -5,7 +5,6 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-    let error;
     switch (action.type) {
         case TOKEN_RECEIVED:
             return {

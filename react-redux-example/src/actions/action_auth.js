@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { RSAA } from 'redux-api-middleware';
 //Token list
 export const TOKEN_REQUEST = '@@jwt/TOKEN_REQUEST';
