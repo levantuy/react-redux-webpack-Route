@@ -20,6 +20,26 @@ export default (state = INITIAL_STATE, action) => {
         case notice.RESET_NOTICES:// reset postList to initial state
             return { ...state, noticesList: { notices: [], error: null, loading: false } };
 
+        case notice.CREATE_NOTICE:// start fetching posts and set loading = true
+            return { ...state, newNotice: { notices: null, error: null, loading: true } };
+        case notice.CREATE_NOTICE_SUCCESS:// return list of posts and make loading = false
+            return { ...state, newNotice: { notices: action.payload, error: null, loading: false } };
+        case notice.CREATE_NOTICE_FAILURE:// return error and make loading = false
+            error = action.payload || { message: action.payload.message };//2nd one is network or server down errors
+            return { ...state, newNotice: { notices: null, error: error, loading: false } };
+        case notice.RESET_NOTICE_CREATE:// reset postList to initial state
+            return { ...state, newNotice: { notices: null, error: null, loading: false } };
+
+        case notice.DELETE_NOTICE:// start fetching posts and set loading = true
+            return { ...state, deletedNotice: { notices: null, error: null, loading: true } };
+        case notice.DELETE_NOTICE_SUCCESS:// return list of posts and make loading = false
+            return { ...state, deletedNotice: { notices: null, error: null, loading: false } };
+        case notice.DELETE_NOTICE_FAILURE:// return error and make loading = false
+            error = action.payload || { message: action.payload.message };//2nd one is network or server down errors
+            return { ...state, deletedNotice: { notices: null, error: error, loading: false } };
+        case notice.RESET_NOTICE_DELETE:// reset postList to initial state
+            return { ...state, deletedNotice: { notices: null, error: null, loading: false } };    
+
 
         // default    
         default:

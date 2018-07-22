@@ -1,76 +1,62 @@
 import React, { Component } from 'react';
-import { reduxForm, SubmissionError } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { Button } from 'react-bootstrap';
-
-//For any field errors upon submission (i.e. not instant check)
-// const btnAdd_Click = (values, dispatch) => {
-//     return dispatch(fetchNotices()).then(result => {
-//         // Note: Error's "data" is in result.payload.response.data (inside "response")
-//         // success's "data" is in result.payload.data
-//         if (result.payload.response && result.payload.response.status !== 200) {
-//             dispatch(fetchNoticesFailure(result.payload.response.data));
-//             throw new SubmissionError(result.payload.response.data);
-//         }
-//         //let other components know that everything is fine by updating the redux` state
-//         dispatch(fetchNoticesSuccess(result.payload.data)); //ps: this is same as dispatching RESET_USER_FIELDS
-//     });
-// }
+import NoticeEdit from '../../components/notice/NoticeEdit';
+import NoticeItem from '../../containers/notice/NoticeItemContainer';
 
 class Home extends Component {
     constructor(props, context) {
         super(props);
         this.state = {
-
+            noticeId: 0
         };
+        this.btnAdd_Click = this.btnAdd_Click.bind(this);
+        this.handleAdd = this.handleAdd.bind(this);
     };
 
-    btnAdd_Click = () => {
+    btnAdd_Click() {
+        this.setState({ noticeId: 0 });
+        this.refs.modal.setState({
+            noticeId: 0,
+            title: '',
+            content: '',
+            url: ''
+        });
+        this.refs.modal.open();
+    }
+
+    handleAdd(item){
+        this.props.addNotice(item);
+        this.refs.modal.close();
         this.props.ContainerfetchNotices();
     }
 
     componentWillMount() {
         this.props.ContainerfetchNotices();
-    }
-
-    renderNotices(notices) {
-        const { handleSubmit, submitting } = this.props;
-
-        return notices.map((notice) => {
-            return (
-                <div key={notice.NoticeId}>
-                    <input type="hidden" value={notice.NoticeId} />
-                    <h4>{notice.Title}</h4>
-                    <pre>{notice.Content}</pre>
-                    <a href={notice.Url} className="pull-right" target="_blank">go to link</a>
-                    <br />
-                    {/* <form onSubmit={handleSubmit(btnAdd_Click.bind(this))}>
-                        <div className="btn-toolbar text-center">
-                            <button type="submit" className="btn btn-primary" disabled={submitting}>Edit</button>
-                            <button type="submit" className="btn btn-primary" disabled={submitting}>Delete</button>
-                        </div>
-                    </form> */}
-                </div>
-            );
-        });
-    }
+    } 
 
     render() {
-        const { notices, loading, error } = this.props.noticesList;        
+        const { notices, loading, error } = this.props.noticesList;
         if (notices === 'undefined' || loading) {
             return <div className="container"><h1>Posts</h1><h3>Loading...</h3></div>
         } else if (error) {
             return <div className="alert alert-danger">Error: {error.message}</div>
         }
 
-        const { handleSubmit, submitting } = this.props;
+        const noticeComponent = notices.map((notice) => (
+            <NoticeItem key={notice.NoticeId}
+                NoticeId={notice.NoticeId}
+                Title={notice.Title}
+                Content={notice.Content}
+                Url={notice.Url}
+            />
+        ));
 
         return (
-
             <div>
-                <form onSubmit={this.btnAdd_Click}>
-                    <button type="submit" className="btn btn-primary">Reload</button>
-                </form>
-                {this.renderNotices(notices)}
+                <Button onClick={this.btnAdd_Click} type="submit" className="btn btn-primary">Add</Button>
+                <NoticeEdit addItem={this.handleAdd} ref="modal" />
+                {noticeComponent}
             </div>
         );
     }

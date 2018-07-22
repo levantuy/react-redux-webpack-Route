@@ -12,6 +12,12 @@ export const CREATE_NOTICE_SUCCESS = 'CREATE_NOTICE_SUCCESS';
 export const CREATE_NOTICE_FAILURE = 'CREATE_NOTICE_FAILURE';
 export const RESET_NOTICE_CREATE = 'RESET_NOTICE_CREATE';
 
+//Notice item
+export const DELETE_NOTICE = 'DELETE_NOTICE';
+export const DELETE_NOTICE_SUCCESS = 'DELETE_NOTICE_SUCCESS';
+export const DELETE_NOTICE_FAILURE = 'DELETE_NOTICE_FAILURE';
+export const RESET_NOTICE_DELETE = 'RESET_NOTICE_DELETE';
+
 //#region NOTICES
 
 const ROOT_URL = 'http://flashlightvn.com/api';
@@ -19,7 +25,6 @@ export const fetchNotices = () => ({
   [RSAA]: {
     endpoint: `${ROOT_URL}/Notice/index`,    
     method: 'GET',
-    // body: JSON.stringify({message: message}),
     headers: withAuth({ 'Content-Type': 'application/json' }),
     types: [
       FETCH_NOTICES, FETCH_NOTICES_SUCCESS, FETCH_NOTICES_FAILURE
@@ -27,13 +32,29 @@ export const fetchNotices = () => ({
   }
 })
 
-export function fetchPostsSuccess(notices){
+export const addNotice = (item) => ({
+  [RSAA]: {
+    endpoint: `${ROOT_URL}/Notice/add`,    
+    method: 'POST',
+    body: JSON.stringify(item),
+    headers: withAuth({ 'Content-Type': 'application/json' }),
+    types: [
+      CREATE_NOTICE, CREATE_NOTICE_SUCCESS, CREATE_NOTICE_FAILURE
+    ]
+  }
+})
 
-};
-
-export function fetchPostsFailure(notices){
-
-};
+export const deleteNotice = (noticeId) => ({
+  [RSAA]: {
+    endpoint: `${ROOT_URL}/Notice/delete?id=` + noticeId,    
+    method: 'DELETE',
+    // body: JSON.stringify(item),
+    headers: withAuth({ 'Content-Type': 'application/json' }),
+    types: [
+      DELETE_NOTICE, DELETE_NOTICE_SUCCESS, DELETE_NOTICE_FAILURE
+    ]
+  }
+})
 
 //#endregion
 
