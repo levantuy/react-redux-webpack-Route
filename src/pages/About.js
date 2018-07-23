@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import About from '../components/about/about';
+import AboutContainer from '../containers/about/AboutContainer';
 
 class PageAbout extends Component {
 
@@ -7,7 +7,7 @@ class PageAbout extends Component {
     return (
       <div>        
         <div className="container">
-          <About/>
+          <AboutContainer/>
         </div>        
       </div>
     );

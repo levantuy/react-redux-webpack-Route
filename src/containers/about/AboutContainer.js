@@ -1,17 +1,18 @@
-import React from 'react'
-import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import About from '../../components/about'
+import About from '../../components/about/About'
+import { fetchInformation } from '../../actions/action_about'
 
 const mapStateToProps = (state) => ({
-  load: state.load,
-  isIncrementing: state.isIncrementing,
-  isDecrementing: state.isDecrementing
+  aboutState: state.aboutReducer.aboutState
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  load
-}, dispatch)
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    fetchInformation: () => {
+      dispatch(fetchInformation()); // but let other comps know
+    }
+  }
+}
 
 export default connect(
   mapStateToProps,

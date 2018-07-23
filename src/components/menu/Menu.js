@@ -37,7 +37,7 @@ class Menu extends Component {
                     <Navbar.Collapse>
                         <Nav>
                             <NavItem componentClass={Link} href="/" to="/">Home</NavItem>
-                            <NavItem componentClass={Link} href="/" to="/about-us">Dashbord</NavItem>
+                            <NavItem componentClass={Link} href="/" to="/about-us">About us</NavItem>
                             <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
                                 <MenuItem eventKey={3.1}>Action</MenuItem>
                                 <MenuItem eventKey={3.2}>Another action</MenuItem>

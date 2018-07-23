@@ -1,14 +1,18 @@
-export const LOAD_REQUESTED = 'action_about/LOAD_SUCCESS'
-export const LOAD = 'action_about/LOAD'
+import { RSAA } from 'redux-api-middleware';
+import { withAuth } from '../reducers'
 
-export const load = () => {
-  return dispatch => {
-    dispatch({
-      type: LOAD_REQUESTED
-    })
+export const LOAD_REQUESTED = 'LOAD_REQUESTED'
+export const LOAD_SUCCESS = 'LOAD_SUCCESS'
+export const LOAD_FAILURE = 'LOAD_FAILURE'
 
-    dispatch({
-      type: LOAD
-    })
+const ROOT_URL = 'http://flashlightvn.com/api';
+export const fetchInformation = () => ({
+  [RSAA]: {
+    endpoint: `${ROOT_URL}/Notice/index`,    
+    method: 'GET',
+    headers: withAuth({ 'Content-Type': 'application/json' }),
+    types: [
+      LOAD_REQUESTED, LOAD_SUCCESS, LOAD_FAILURE
+    ]
   }
-}
+})

@@ -1,22 +1,30 @@
-import { LOAD_REQUESTED, LOAD } from '../actions/action_about'
+import * as about from '../actions/action_about'
 
 const initialState = {
-    load: false
+    aboutState: {error: null, loading: false}
 }
 
 export default (state = initialState, action) => {
+    let error;
     switch (action.type) {
-        case LOAD_REQUESTED:
+        case about.LOAD_REQUESTED:            
             return {
                 ...state,
-                load: true
+                aboutState: {error: null, loading: true}
             }
 
-        case LOAD:
+        case about.LOAD_SUCCESS:
+            
             return {
                 ...state,
-                load: !state.load
-            }     
+                aboutState: {error: null, loading: false}
+            }
+        case about.LOAD_FAILURE:
+            error = action.payload || { message: action.payload.message };//2nd one is network or server down errors
+            return {
+                ...state,
+                aboutState: {error: error, loading: false}
+            }
 
         default:
             return state

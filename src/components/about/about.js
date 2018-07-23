@@ -5,7 +5,7 @@ class About extends Component {
         return (
             <div>
                 <h1>About Us</h1>
-                <p>Hello Medium!</p>
+                <p>Hello guest!</p>
             </div>
         );
     }
