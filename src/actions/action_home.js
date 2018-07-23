@@ -25,10 +25,10 @@ export const SEARCH_NOTICE_FAILURE = 'SEARCH_NOTICE_FAILURE';
 
 //#region NOTICES
 
-const ROOT_URL = 'http://flashlightvn.com/api';
+const ROOT_URL = 'https://obscure-atoll-39265.herokuapp.com';
 export const fetchNotices = () => ({
   [RSAA]: {
-    endpoint: `${ROOT_URL}/Notice/index`,    
+    endpoint: `${ROOT_URL}/Tasks`,    
     method: 'GET',
     headers: withAuth({ 'Content-Type': 'application/json' }),
     types: [
@@ -39,8 +39,20 @@ export const fetchNotices = () => ({
 
 export const addNotice = (item) => ({
   [RSAA]: {
-    endpoint: `${ROOT_URL}/Notice/add`,    
+    endpoint: `${ROOT_URL}/Tasks`,    
     method: 'POST',
+    body: JSON.stringify(item),
+    headers: withAuth({ 'Content-Type': 'application/json' }),
+    types: [
+      CREATE_NOTICE, CREATE_NOTICE_SUCCESS, CREATE_NOTICE_FAILURE
+    ]
+  }
+})
+
+export const updateNotice = (item) => ({
+  [RSAA]: {
+    endpoint: `${ROOT_URL}/Tasks/` + item.NoticeId,    
+    method: 'PUT',
     body: JSON.stringify(item),
     headers: withAuth({ 'Content-Type': 'application/json' }),
     types: [
@@ -51,7 +63,7 @@ export const addNotice = (item) => ({
 
 export const deleteNotice = (noticeId) => ({
   [RSAA]: {
-    endpoint: `${ROOT_URL}/Notice/delete?id=` + noticeId,    
+    endpoint: `${ROOT_URL}/Tasks/` + noticeId,    
     method: 'DELETE',
     // body: JSON.stringify(item),
     headers: withAuth({ 'Content-Type': 'application/json' }),
@@ -63,9 +75,8 @@ export const deleteNotice = (noticeId) => ({
 
 export const searchNotice = (searchText) => ({
   [RSAA]: {
-    endpoint: `${ROOT_URL}/Notice/search?searchText=` + searchText,    
+    endpoint: `${ROOT_URL}/Tasks/search/` + searchText,    
     method: 'GET',
-    // body: JSON.stringify({searchText: searchText}),
     headers: withAuth({ 'Content-Type': 'application/json' }),
     types: [
       SEARCH_NOTICE, SEARCH_NOTICE_SUCCESS, SEARCH_NOTICE_FAILURE

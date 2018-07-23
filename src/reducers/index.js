@@ -15,6 +15,6 @@ export const accessToken = state => fromAuth.accessToken(state.authReducer)
 export function withAuth(headers={}) {
   return (state) => ({
     ...headers,
-    'Authorization': `Bearer ${accessToken(state)}`
+    'x-access-token': `${accessToken(state)}`
   })
 }

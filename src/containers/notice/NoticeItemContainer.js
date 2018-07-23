@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { addNotice, deleteNotice } from '../../actions/action_home.js'
+import { updateNotice, deleteNotice } from '../../actions/action_home.js'
 import NoticeItem from '../../components/notice/NoticeItem';
 
 const mapStateToProps = (state) => ({
@@ -10,7 +10,7 @@ const mapDispatchToProps = (dispatch) => {
   return {     
     // add
     addNotice: (item)=>{
-      dispatch(addNotice(item));
+      dispatch(updateNotice(item));
     },   
     //delete
     deleteNotice: (noticeId)=>{
