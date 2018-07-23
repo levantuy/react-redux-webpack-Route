@@ -35,7 +35,6 @@ class NoticeItem extends Component {
     handleAdd(item){
         this.props.addNotice(item);
         this.refs.modal.close();
-        this.props.ContainerfetchNotices();
     }
 
     handleAccept(){
@@ -43,7 +42,6 @@ class NoticeItem extends Component {
         this.refs.confirmMessage.setState({
             showModal: false
         });
-        this.props.ContainerfetchNotices();
     };
 
     handleCancel(){

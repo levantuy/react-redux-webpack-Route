@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { fetchNotices, addNotice, deleteNotice } from '../../actions/action_home.js'
+import { fetchNotices, addNotice } from '../../actions/action_home.js'
 import Home from '../../components/home/Home.js'
 
 const mapStateToProps = (state) => ({

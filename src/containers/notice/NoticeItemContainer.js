@@ -3,7 +3,7 @@ import { addNotice, deleteNotice, fetchNotices } from '../../actions/action_home
 import NoticeItem from '../../components/notice/NoticeItem';
 
 const mapStateToProps = (state) => ({
-  
+  noticesList: state.homeReducer.noticesList
 })
 
 const mapDispatchToProps = (dispatch) => {
@@ -15,10 +15,6 @@ const mapDispatchToProps = (dispatch) => {
     //delete
     deleteNotice: (noticeId)=>{
       dispatch(deleteNotice(noticeId));
-    },
-    // show
-    ContainerfetchNotices: () => {
-      dispatch(fetchNotices());
     }
   }
 }
