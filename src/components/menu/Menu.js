@@ -5,6 +5,24 @@ import logo from '../../logo.svg';
 import { Link } from 'react-router';
 
 class Menu extends Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            searchText: ''
+        };
+        this.btnSearchClick = this.btnSearchClick.bind(this);
+        this.handleOnChange = this.handleOnChange.bind(this);
+    }
+    
+    btnSearchClick(){
+        this.props.searchNotice(this.state.searchText);
+    }
+
+    handleOnChange(e){
+        this.setState({
+            searchText: e.target.value
+        });
+    }
 
     render() {
         return (
@@ -30,9 +48,9 @@ class Menu extends Component {
                         </Nav>
                         <Navbar.Form pullLeft>
                             <FormGroup>
-                                <FormControl type="text" placeholder="Search" onChange={this.handleOnChange} />
+                                <FormControl type="text" placeholder="Search" value={this.state.searchText} onChange={this.handleOnChange} />
                             </FormGroup>{' '}
-                            <Button type="submit">Submit</Button>
+                            <Button type="submit" onClick={this.btnSearchClick}>Submit</Button>
                         </Navbar.Form>
                         <Nav pullRight>
                             <NavItem eventKey={1} href="#">Link Right</NavItem>

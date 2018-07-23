@@ -18,6 +18,11 @@ export const DELETE_NOTICE_SUCCESS = 'DELETE_NOTICE_SUCCESS';
 export const DELETE_NOTICE_FAILURE = 'DELETE_NOTICE_FAILURE';
 export const RESET_NOTICE_DELETE = 'RESET_NOTICE_DELETE';
 
+//Search
+export const SEARCH_NOTICE = 'SEARCH_NOTICE';
+export const SEARCH_NOTICE_SUCCESS = 'SEARCH_NOTICE_SUCCESS';
+export const SEARCH_NOTICE_FAILURE = 'SEARCH_NOTICE_FAILURE';
+
 //#region NOTICES
 
 const ROOT_URL = 'http://flashlightvn.com/api';
@@ -52,6 +57,18 @@ export const deleteNotice = (noticeId) => ({
     headers: withAuth({ 'Content-Type': 'application/json' }),
     types: [
       DELETE_NOTICE, DELETE_NOTICE_SUCCESS, DELETE_NOTICE_FAILURE
+    ]
+  }
+})
+
+export const searchNotice = (searchText) => ({
+  [RSAA]: {
+    endpoint: `${ROOT_URL}/Notice/search?searchText=` + searchText,    
+    method: 'GET',
+    // body: JSON.stringify({searchText: searchText}),
+    headers: withAuth({ 'Content-Type': 'application/json' }),
+    types: [
+      SEARCH_NOTICE, SEARCH_NOTICE_SUCCESS, SEARCH_NOTICE_FAILURE
     ]
   }
 })

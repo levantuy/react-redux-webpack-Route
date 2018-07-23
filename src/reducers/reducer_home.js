@@ -37,6 +37,13 @@ export default (state = INITIAL_STATE, action) => {
         case notice.RESET_NOTICE_DELETE:// reset postList to initial state
             return { ...state, noticesList: { notices: null, notice: null, error: null, loading: false } };    
 
+        case notice.SEARCH_NOTICE:// start fetching posts and set loading = true
+            return { ...state, noticesList: { notices: null, notice: null, error: null, loading: true } };
+        case notice.SEARCH_NOTICE_SUCCESS:// return list of posts and make loading = false
+            return { ...state, noticesList: { notices: action.payload.data, notice: null, error: null, loading: false } };
+        case notice.SEARCH_NOTICE_FAILURE:// return error and make loading = false
+            error = action.payload || { message: action.payload.message };//2nd one is network or server down errors
+            return { ...state, noticesList: { notices: null, notice: null, error: error, loading: false } };            
 
         // default    
         default:

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Menu from '../menu/Menu';
+import MenuContainer from '../../containers/menu/MenuContainer';
 
 export default class App extends Component {
 
     render() {
         return (
             <div>
-                <Menu />
+                <MenuContainer />
                 <div className="container">
                     {this.props.children}
                 </div>

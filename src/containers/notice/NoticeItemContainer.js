@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { addNotice, deleteNotice, fetchNotices } from '../../actions/action_home.js'
+import { addNotice, deleteNotice } from '../../actions/action_home.js'
 import NoticeItem from '../../components/notice/NoticeItem';
 
 const mapStateToProps = (state) => ({
