@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 import { Button } from 'react-bootstrap';
 import NoticeEdit from '../../components/notice/NoticeEdit';
 import NoticeItem from '../../containers/notice/NoticeItemContainer';
+import axios from 'axios';
 
 class Home extends Component {
     constructor(props, context) {
@@ -25,7 +26,7 @@ class Home extends Component {
         this.refs.modal.open();
     }
 
-    handleAdd(item){
+    handleAdd(item) {
         this.props.addNotice(item);
         this.refs.modal.close();
         this.props.ContainerfetchNotices();
@@ -33,7 +34,15 @@ class Home extends Component {
 
     componentWillMount() {
         this.props.ContainerfetchNotices();
-    } 
+        //
+        axios.get(`http://flashlightvn.com/api/Token?username=admin&password=123456`).then(response => {
+            // If request is good...
+
+        })
+            .catch((error) => {
+                console.log('Message error: ' + error);
+            });
+    }
 
     render() {
         const { notices, loading, error } = this.props.noticesList;
