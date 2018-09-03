@@ -1,6 +1,6 @@
-import { connect } from 'react-redux'
-import About from '../../components/about/About'
-import { fetchInformation } from '../../actions/action_about'
+import { connect } from 'react-redux';
+import About from '../../components/about/About';
+import { fetchInformation } from '../../actions/action_about';
 
 const mapStateToProps = (state) => ({
   aboutState: state.aboutReducer.aboutState
